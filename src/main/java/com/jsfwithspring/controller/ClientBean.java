@@ -52,6 +52,20 @@ public class ClientBean implements Serializable {
         updateComponents("formPanel", "tablePanel");
     }
 
+    public void prepareUpdate(Client client) {
+        log.info(String.format("Preparing client %s for update", newClient.getName()));
+        newClient = client;
+        updateComponents("formPanel");
+    }
+
+    public void delete(Client client) {
+        log.info(String.format("Deleting client %s", client.getName()));
+        clientService.delete(client);
+        log.info("Client deleted successfully");
+        searchForClients();
+        updateComponents("tablePanel");
+    }
+
     private void updateComponents(String... components) {
         log.info(String.format("Updating components %s",
                 Stream.of(components).collect(Collectors.joining(", "))));

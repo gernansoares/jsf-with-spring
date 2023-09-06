@@ -1,6 +1,6 @@
 # JSF with Spring Boot 3
 
-Example project of how to use Spring Boot 3 with JSF
+Sample project of how to use Spring Boot 3 with JSF
 
 ## Main technologies
 
