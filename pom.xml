@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Jsf with Spring</name>
+    <name>JSF with Spring</name>
     <description>Demo project for Spring Boot with JSF</description>
 
     <properties>
