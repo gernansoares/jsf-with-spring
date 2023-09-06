@@ -18,11 +18,11 @@ import java.util.stream.Stream;
 @Named
 @ViewScoped
 @Slf4j
-public class ClientBean implements Serializable {
+public class ClientController implements Serializable {
 
     @Getter
     @Setter
-    private Client newClient;
+    private Client formClient;
 
     @Getter
     private List<Client> clients;
@@ -35,26 +35,29 @@ public class ClientBean implements Serializable {
         searchForClients();
     }
 
+    private void initClientFields() {
+        formClient = new Client();
+    }
+
     public void searchForClients() {
         log.info("Searching for clients");
         clients = clientService.findAll();
     }
 
-    private void initClientFields() {
-        newClient = new Client();
-    }
-
     public void create() {
-        log.info(String.format("Saving client %s", newClient.getName()));
-        clientService.create(newClient);
+        log.info(String.format("Saving client %s", formClient.getName()));
+        clientService.create(formClient);
         log.info("Client saved successfully");
-        init();
+
+        initClientFields();
+        searchForClients();
         updateComponents("formPanel", "tablePanel");
     }
 
     public void prepareUpdate(Client client) {
-        log.info(String.format("Preparing client %s for update", newClient.getName()));
-        newClient = client;
+        log.info(String.format("Preparing client %s for update", formClient.getName()));
+        formClient = client;
+
         updateComponents("formPanel");
     }
 
@@ -62,6 +65,7 @@ public class ClientBean implements Serializable {
         log.info(String.format("Deleting client %s", client.getName()));
         clientService.delete(client);
         log.info("Client deleted successfully");
+
         searchForClients();
         updateComponents("tablePanel");
     }

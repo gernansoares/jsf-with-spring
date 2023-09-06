@@ -6,7 +6,17 @@
               version="2.2">
 
     <application>
+        <resource-bundle>
+            <base-name>settings</base-name>
+            <var>set</var>
+        </resource-bundle>
+
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
+
+    <converter>
+        <converter-for-class>java.lang.Enum</converter-for-class>
+        <converter-class>javax.faces.convert.EnumConverter</converter-class>
+    </converter>
 
 </faces-config>

@@ -8,57 +8,76 @@
       xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-    <f:viewAction action="#{clientBean.init()}"/>
+    <f:viewAction action="#{clientController.init()}"/>
 </f:metadata>
 
 <h:head>
 </h:head>
 
 <h:body>
-    <p:growl id="message" showDetail="true"/>
+    <p:growl>
+        <p:autoUpdate/>
+    </p:growl>
+    <p:messages>
+        <p:autoUpdate/>
+    </p:messages>
 
-    <p:panel header="Client form">
+    <p:panel header="#{(clientController.formClient.id eq null ?
+        'New client' : 'Editing client '.concat(clientController.formClient.id))}">
         <p:outputPanel id="formPanel">
             <h:form>
-                <p:panelGrid columns="5" layout="grid" styleClass="showcase-text-align-center"
+                <p:panelGrid columns="5" layout="grid"
                              columnClasses="ui-g-12 ui-md-1, ui-g-12 ui-md-3, ui-g-12 ui-md-1, ui-g-12 ui-md-3, ui-g-12 ui-md-4">
-                    <h:outputText value="Name"/>
-                    <p:inputText value="#{clientBean.newClient.name}"/>
-                    <h:outputText value="Email"/>
-                    <p:inputText value="#{clientBean.newClient.email}"/>
-                    <p:commandButton value="Save" action="#{clientBean.create()}" icon="pi pi-save"/>
+
+                    <p:outputLabel value="Name" for="name"/>
+                    <p:inputText id="name" value="#{clientController.formClient.name}"/>
+                    <p:outputLabel value="Email" for="email"/>
+                    <p:inputText id="email" value="#{clientController.formClient.email}"/>
+                    <p:commandButton value="Save" action="#{clientController.create()}"
+                                     icon="pi pi-save"/>
                 </p:panelGrid>
+
             </h:form>
         </p:outputPanel>
+        <p:autoUpdate/>
     </p:panel>
 
-    <br/><br/>
+    <br/>
 
     <p:panel header="Clients">
         <p:outputPanel id="tablePanel">
             <h:form>
-                <p:dataTable value="#{clientBean.clients}" var="client">
-                    <p:column headerText="Name">
+
+                <p:dataTable value="#{clientController.clients}" var="client" allowUnsorting="true" sortMode="single">
+                    <p:column sortBy="#{client.id}" headerText="ID">
+                        <p:outputLabel value="#{client.id}"/>
+                    </p:column>
+                    <p:column sortBy="#{client.name}" headerText="Name">
                         <p:outputLabel value="#{client.name}"/>
                     </p:column>
-                    <p:column headerText="Email">
+                    <p:column sortBy="#{client.email}" headerText="Email">
                         <p:outputLabel value="#{client.email}"/>
                     </p:column>
                     <p:column headerText="Actions">
-                        <p:commandButton value="Edit" action="#{clientBean.prepareUpdate(client)}" icon="pi pi-pencil"/>
-                        <p:commandButton value="Delete" action="#{clientBean.delete(client)}" styleClass="ui-button-danger"  icon="pi pi-trash">
+                        <p:commandButton value="Edit" action="#{clientController.prepareUpdate(client)}"
+                                         icon="pi pi-pencil"/>
+
+                        <p:commandButton value="Delete" action="#{clientController.delete(client)}"
+                                         styleClass="ui-button-danger" icon="pi pi-trash">
                             <p:confirm header="Confirmation" message="Do you want to delete this record?"
                                        icon="pi pi-info-circle"/>
                         </p:commandButton>
                     </p:column>
+
                 </p:dataTable>
+
             </h:form>
         </p:outputPanel>
     </p:panel>
 
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"/>
     </p:confirmDialog>
 </h:body>
 
