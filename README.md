@@ -12,4 +12,6 @@ Example project of how to use Spring Boot 3 with JSF
 
 ## How to run
 
-Execute **mvn clean package** then **java -jar target/jsf-with-spring-0.0.1-SNAPSHOT.jar**
+Execute **mvn clean package** then **java -jar target/jsf-with-spring-0.0.1-SNAPSHOT.jar** to run
+
+Once running, access **localhost:8080\index.xhtml** from the client example page
