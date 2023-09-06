@@ -33,10 +33,9 @@
                     <p:inputText id="name" value="#{clientController.formClient.name}"/>
                     <p:outputLabel value="Email" for="email"/>
                     <p:inputText id="email" value="#{clientController.formClient.email}"/>
-                    <p:commandButton value="Save" action="#{clientController.create()}"
-                                     icon="pi pi-save"/>
-                </p:panelGrid>
+                    <p:commandButton value="Save" action="#{clientController.create()}" icon="pi pi-save"/>
 
+                </p:panelGrid>
             </h:form>
         </p:outputPanel>
         <p:autoUpdate/>
@@ -68,7 +67,6 @@
                                        icon="pi pi-info-circle"/>
                         </p:commandButton>
                     </p:column>
-
                 </p:dataTable>
 
             </h:form>
